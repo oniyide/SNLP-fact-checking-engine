@@ -1,0 +1,12 @@
+MailChannels
+MailChannels is a privately held, anti-spam technology company based in Vancouver, British Columbia.
+MailChannels specializes in software and services that detect and block the sending of spam, phishing and other abusive email. Unlike most anti-spam technology providers, MailChannels positions itself as a leader in blocking abusive email at its source by installing software and services within sending networks and services such as ISPs and web hosting providers.
+To combat outgoing spam, MailChannels offers customers either a cloud-based SMTP relay service, or software that is installed by the customer within their network. MailChannels' software derives from the open-source web proxy software Nginx, and as such, the company makes the claim that its software is extremely scalable and robust.
+MailChannels' customers include large web hosting companies, internet service providers, mailbox providers and email service providers such as Endurance International Group, SendGrid, Sherweb, and Locaweb.
+The company was founded in 2004 by former engineers of ActiveState (acquired by Sophos), who created one of the first commercial spam filters.
+The company's first product was an SMTP proxy that provides tar-pitting and transparent SMTP proxy functionality for inbound email filtering. At the 2007 MIT Spam Conference, the company's founder, Ken Simpson, was awarded the "best paper" award.
+In 2007, MailChannels joined MAAWG and closed a series A round led by current and former Microsoft employees.
+In 2010, the company launched an outbound email filtering software that claims to be capable of filtering up to 30 million messages per hour, transparently in the network. Outbound email filtering involves scanning email traffic as it exits the network, identifying compromised accounts, and reducing the risk of having IP addresses blocked by receiving networks.
+In 2013, the company launched an outbound spam filtering service.
+In 2016, the company launched a reseller program.
+In 2018, the company launch an inbound spam filtering service.

@@ -1,0 +1,5 @@
+Concatenative synthesis
+Concatenative synthesis is a technique for synthesising sounds by concatenating short samples of recorded sound (called units). The duration of the units is not strictly defined and may vary according to the implementation, roughly in the range of 10 milliseconds up to 1 second. It is used in speech synthesis and music sound synthesis to generate user-specified sequences of sound from a database built from recordings of other sequences.
+In contrast to granular synthesis, concatenative synthesis is driven by an analysis of the source sound, in order to identify the units that best match the specified criterion.
+Concatenative synthesis for music started to develop in the 2000s in particular through the work of Schwarz  and Pachet  (so-called musaicing). The basic techniques are similar to those for speech, although with differences due to the differing nature of speech and music: for example, the segmentation is not into phonetic units but often into subunits of musical notes or events.
+

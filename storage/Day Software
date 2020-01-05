@@ -1,0 +1,11 @@
+Day Software
+Day Software was an enterprise content management software company headquartered in Basel, Switzerland and Boston, Massachusetts. Day Software was founded in 1993 in Basel, Switzerland.
+Day creates content management infrastructure software in the Day CRX product line and enterprise content management applications in the Day Communiqué product line. Its most important product is Day Communiqué WCM, a Web content management system that is used for public-facing websites and intranets of large corporations such as McDonald's, Avanza and Daimler.
+Day is engaged in the content repository API for Java standardization process and contributes to open source software projects such as Apache Jackrabbit and Apache Sling.
+Adobe Systems announced a tender offer to acquire Day Software on 28 July 2010 for US$240 million. The tender offer was successfully completed on 29 October 2010.
+Adobe WCM is a web content management system based on CRX for the content repository and Apache Sling as a web framework.
+Adobe Content Repository Extreme (Adobe CRX) is a content repository that implements the content repository API for Java (JSR-170). It is based on the open source reference implementation Apache Jackrabbit and serves as the foundation of all other products by Day Software.
+With the JCR connectors Day provides a set of software components that allow software developers to access content repositories and content management systems that are not JSR-170 compliant using the content repository API for Java. Examples for content management systems supported are Microsoft SharePoint and Documentum. Uses JSR 283 and JSR 170 to display.
+Adobe DAM is digital asset management system based on CRX for the content repository and Apache Sling as a web framework. It integrates with Day Communiqué WCM to allow re-use of images, documents, audio and video files from the DAM in the web site.
+Adobe Advanced Collaboration contains a Wiki that can be used as a stand-alone product with optional integration into Day Communiqué WCM and a Calendar and Blog component that extend the feature set of Day Communiqué WCM. The Advanced Collaboration product also uses CRX as a content repository and Apache Sling as a web framework.
+Product history of Adobe CQ
