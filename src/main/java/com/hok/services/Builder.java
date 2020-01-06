@@ -19,7 +19,10 @@ public class Builder {
     private static final String storage_dir = "storage/";
 
     private static final Map<String, String> fact_map = new HashMap<>();
+    private static final Map<String, String> correction_map = new HashMap<>();
+
     private static final Map<String, String> result_map = new HashMap<>();
+    int correct_count = 0;
 
 
     public void launch()  {
@@ -36,6 +39,7 @@ public class Builder {
                         List<String> fact_content = Arrays.asList(line.split("\t"));
 
                         fact_map.put(fact_content.get(0), fact_content.get(1));
+                        correction_map.put(fact_content.get(0), fact_content.get(2));
 
                     }
 
@@ -72,16 +76,22 @@ public class Builder {
             Watson watson = new Watson();
             String info = watson.search(tokens);
             boolean match = match(info, tokens);
-            String macth_val;
+            String match_val;
             if (match == true)
-                macth_val = "1.0";
+                match_val = "1.0";
             else
-                macth_val = "0.0";
+                match_val = "0.0";
 
-            result_map.put((String) pair.getKey(), macth_val);
+            String fact = (String) pair.getKey();
+            result_map.put(fact, match_val);
 //            System.out.println((String) pair.getKey()+"\t"+macth_val);
 
+            if (match_val.equals(correction_map.get(fact))){
+                correct_count++;
+            }
         }
+        double precision = (double) correct_count/correction_map.size();
+        System.out.println("Value of precision: "+precision);
     }
 
     public Map<String, String> tokenSanitizer(String text){
