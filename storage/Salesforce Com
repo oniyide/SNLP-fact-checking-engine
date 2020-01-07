@@ -1,4 +1,24 @@
 Salesforce
+Salesforce head office
+Type Public
+Traded as NYSE: CRM S&P 500 Component
+ISIN US79466L3024
+Industry Cloud computing Software
+Founded 1999; 21 years ago (1999)
+Founders Marc Benioff Parker Harris Dave Moellenhoff Frank Dominguez
+Headquarters Salesforce Tower San Francisco, California, US
+Key people Marc Benioff (Chairman, co CEO) Keith Block (co CEO) Parker Harris (Co Founder)
+Products Sales Cloud Service Cloud Platform Marketing Cloud Commerce Cloud Community Cloud
+Services Cloud computing
+Revenue US$1328 billion (2019)
+Operating income US$535 million (2019)
+Net income US$111 billion (2019)
+Total assets US$3073 billion (2019)
+Total equity US$1560 billion (2019)
+Owner Marc Benioff
+Number of employees 35,000 (2019)
+Subsidiaries Quip Demandware Heroku MuleSoft Tableau Software
+Website salesforcecom
 
 Salesforce.com, Inc. is an American cloud-based software company headquartered in San Francisco, California. It provides customer-relationship management (CRM) service and also sells a complementary suite of enterprise applications focused on customer service, marketing automation, analytics, and application development.
 Salesforce was ranked first in Fortune's 100 Best Companies to Work For in 2018 and second in 2019.
@@ -13,7 +33,7 @@ Force.com applications are built using declarative tools, backed by Lightning[fu
 In the Spring 2015 release a new framework for building user interfaces – Lightning Components – was introduced in beta. Lightning components are built using the open-source Aura Framework but with support for Apex as the server-side language instead of Aura's Javascript dependency. This has been described as an alternative to, not necessarily a replacement for, Visualforce pages.
 According to a September 2009 Gartner Group report, Force.com had over 1,000 customer accounts. As of 2013, the Force.com platform has 1.4 million registered developers.
 Lightning Base Components is the component library built on top of Lightning Web Components.
-Community Cloud provides Salesforce customers the ability to create online web properties for external collaboration, customer service, channel sales, and other custom portals in their instance of Salesforce. Tightly integrated to Sales Cloud, Service Cloud, and App Cloud, Community Cloud can be quickly customized to provide a wide variety of web properties. Community Cloud combines the functionality of the former Salesforce Customer and Partner Portals with some additional features..
+Community Cloud provides Salesforce customers the ability to create online web properties for external collaboration, customer service, channel sales, and other custom portals in their instance of Salesforce. Tightly integrated to Sales Cloud, Service Cloud, and App Cloud, Community Cloud can be quickly customized to provide a wide variety of web properties. Community Cloud combines the functionality of the former Salesforce Customer and Partner Portals with some additional features.
 Work.com, previously Rypple, is a social performance management platform that helps managers and employees improve work performance through continuous coaching, real-time feedback, and recognition. It is marketed as a solution for sales performance, customer service, marketing, and as a service that can be employed by human resource departments.
 Work.com, then known as "Rypple", was founded by Daniel Debow and David Stein, who wanted to create a simple way of asking for feedback anonymously at work. The company was formed in May 2008 and their client list included Mozilla, Facebook, LinkedIn and the Gilt Groupe. Rypple "'reverses the onus on the demand for more feedback' by getting employees to build and manage their own coaching networks".
 In September 2011, Rypple announced that they had hired Bohdan Zabawskyj as its Chief Technology Officer.

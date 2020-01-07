@@ -10,12 +10,14 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.Normalizer;
 import java.util.Map;
 
 public class Watson {
 
     private static final String storage_dir = "storage/";
     private static final String url = "https://en.wikipedia.org/w/index.php?search=";
+
 
 
 //    public String search_result;
@@ -74,6 +76,14 @@ public class Watson {
 
 
     public String subject_check(String subject, File file_subj){
+        String action_types[] = new String[]{"Born", "Died","Spouse(s)", "Founded", "Headquarters",
+                "Author", "Owner", "subsidiaries", "Divisions", "Parent", "Awards", };
+
+
+
+
+
+
         String info = "";
         if (!file_subj.exists()){
             try {
@@ -89,9 +99,28 @@ public class Watson {
 
                 }
                 Element heading = doc.selectFirst("h1");
+                info += heading.text()+ "\n";
+                Element infobox = doc.selectFirst("table.infobox");
+                if (infobox != null){
+//                    System.out.println(infobox.text());
+                    Elements rows = infobox.select("tr");
+                    for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+                        Element row = rows.get(i);
+                        String row_text = row.text();
+                        row_text = Normalizer.normalize(row_text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+                        row_text = row_text.replaceAll("\\.","");  //removing fullstops since fullstops were removed as well in object
+                        row_text = row_text.replaceAll("-"," ");
+
+                        info += row_text +"\n";
+                    }
+                }
+
+
+
+
                 Elements paragraphs = doc.select("p:not(:has(#coordinates))");
 //                System.out.println("Fact Title: "+ doc.title());
-                info += heading.text()+ "\n";
+//                info += heading.text()+ "\n";
                 for (Element p : paragraphs){
                     info += p.text() + "\n";
                 }

@@ -12,9 +12,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Builder {
+    // activate if using training data
+//    private static final String result_data = "SNLP2019_training_result.ttl";
+//    private static final String train_data = "SNLP2019_training.tsv";
 
-    private static final String result_data = "SNLP2019_training_result.ttl";
-    private static final String train_data = "SNLP2019_training.tsv";
+    private static final String result_test_data = "SNLP2019_test_result.ttl";
+    private static final String test_data = "SNLP2019_test.tsv";
 
     private static final String storage_dir = "storage/";
 
@@ -27,7 +30,7 @@ public class Builder {
 
     public void launch()  {
         new File(storage_dir).mkdirs();
-        File file = new File(train_data);
+        File file = new File(test_data);
         LineIterator lineItr = null;
         try {
             lineItr = FileUtils.lineIterator(file, "UTF-8");
@@ -39,7 +42,8 @@ public class Builder {
                         List<String> fact_content = Arrays.asList(line.split("\t"));
 
                         fact_map.put(fact_content.get(0), fact_content.get(1));
-                        correction_map.put(fact_content.get(0), fact_content.get(2));
+                        //  activate for training data only
+//                        correction_map.put(fact_content.get(0), fact_content.get(2));
 
                     }
 
@@ -59,7 +63,20 @@ public class Builder {
     }
 
     public void exportToFile(Map<String, String> res_export){
+        try {
+            String data = "";
 
+            String p1 = "<http://swc2017.aksw.org/task2/dataset/";
+            String p2 = "<http://swc2017.aksw.org/hasTruthValue>";
+            String p3 = "^^<http://www.w3.org/2001/XMLSchema#double>";
+
+            for (Map.Entry<String, String> e : res_export.entrySet())
+                data += (p1 + e.getKey() + "> " + p2 + " \"" + e.getValue() + "\"" + p3 + " .\n");
+
+            FileUtils.writeStringToFile(new File(result_test_data), data, "UTF-8");
+        } catch (Exception e) {
+            System.out.println("Couldn't Write: " + result_test_data);
+        }
     }
 
 
@@ -84,14 +101,16 @@ public class Builder {
 
             String fact = (String) pair.getKey();
             result_map.put(fact, match_val);
-//            System.out.println((String) pair.getKey()+"\t"+macth_val);
 
+            /*
             if (match_val.equals(correction_map.get(fact))){
                 correct_count++;
             }
+            */
         }
-        double precision = (double) correct_count/correction_map.size();
-        System.out.println("Value of precision: "+precision);
+        // Only activate when using training data
+//        double precision = (double) correct_count/correction_map.size();
+//        System.out.println("Value of precision: "+precision);
     }
 
     public Map<String, String> tokenSanitizer(String text){
@@ -103,7 +122,7 @@ public class Builder {
                 "\\bof\\b", "\\bfor\\b", "\\bdas\\b", "\\bthe\\b", "\\bde\\b", "\\ba\\b",
                 "\\bal\\b", "\\bas\\b" ,"\\bdel\\b", "\\bdu\\b", "\\bvon\\b", "\\ble\\b",
                 "\\blas\\b", "\\bby\\b", "\\bon\\b", "\\bat\\b", "\\bden\\b", "\\bfrom\\b",
-                "\\bat\\b","\\bshek\\b","\\bcom\\b"};
+                "\\bat\\b","\\bshek\\b","\\bcom\\b", "\\bwith\\b"};
 
         for (String s: dummies){
             String new_s = s.substring(2,s.length()-2);
@@ -178,7 +197,15 @@ public class Builder {
             text = watson.searchUpdate(token_fact);
             search_range = StringUtils.ordinalIndexOf(text, ".", 2);
         }
-        subtext = text.substring(0, search_range);
+        if (search_range == -1){
+            System.out.println(subject);
+            subtext = text;
+        }else {
+            subtext = text.substring(0, search_range);
+        }
+
+
+
 
         subtext = Normalizer.normalize(subtext, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
         subtext = subtext.replaceAll("\\.","");  //removing fullstops since fullstops were removed as well in object
@@ -187,7 +214,7 @@ public class Builder {
         Pattern pattern = Pattern.compile(strPattern + object);
         Matcher matcher = pattern.matcher(subtext);
 
-//        if (subject.contains("Michael Swanwick"))
+//        if (subject.contains("John  King Of England"))
 //            System.out.println(subtext);
 
 
@@ -218,7 +245,10 @@ public class Builder {
                         match =true;
                     }
                     else {
+                        text = Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""); // just added
                         matcher = pattern.matcher(text);
+//                        if (subject.contains("Elie Wiesel"))
+//                            System.out.println("Full text " + text);
                         if (matcher.find()){
 //                            System.out.print("TRUE \t");
 //                            System.out.print(token_fact+"\n");
@@ -235,6 +265,11 @@ public class Builder {
             }
 
         }
+//        if (action.contains("birth place")){
+//            System.out.println(token_fact+ " " +match);
+//        }
+
+
 
         return match;
     }
@@ -243,27 +278,27 @@ public class Builder {
     public String stringPattern(String action){
         String strPattern ="";
         if (action.equals("author")){
-            strPattern = "[A-Za-z0-9 \\-]*(novel by|written by|by author|by the|by|novel|written|book|author)[A-Za-z0-9 \\-]*";
-        }else if (action.equals("author")){
-            strPattern = "[A-Za-z0-9 \\-]*(award|awarded|)[A-Za-z0-9 \\-]*";
+            strPattern = ".*(novel by|written by|by author|by the|by|novel|written|book|author|Author).{0,30}";
+        }else if (action.equals("award")){
+            strPattern = ".*(award|awarded|received|awards|Awards).{0,30}";
         }else if (action.equals("better half")|| action.equals("spouse")){
-            strPattern = "[A-Za-z0-9 \\-]*(married|marry|wife|husband)[A-Za-z0-9 \\-]*";
+            strPattern = ".*(married|marry|wife|husband|spouse|spouse\\(s\\)).{0,30}";
         }else if (action.equals("birth place")||action.equals("nascence place")){
-            strPattern = "[A-Za-z0-9 \\-]*(born in|born|origin|originated)[A-Za-z0-9 \\-]*";
-        }else if (action.equals("birth place")){
-            strPattern = "[A-Za-z0-9 \\-]*(born in)[A-Za-z0-9 \\-]*";
+            strPattern = ".*(born in|born|origin|originated|Born).{0,30}";
+        }else if (action.equals("death place") || action.equals("last place")){
+            strPattern = ".*(died|dead|death|killed|Died).{0,30}";
         }else if (action.equals("foundation place")){
-            strPattern = "[A-Za-z0-9 \\-]*(in|at)[A-Za-z0-9 \\-]*";
-        }else if (action.equals("death place")){
-            strPattern = "[A-Za-z0-9 \\-]*(died|dead|death|killed)[A-Za-z0-9 \\-]*";
-        }else if (action.equals("generator")){
-            strPattern = "[A-Za-z0-9 \\-]*[A-Za-z0-9 \\-]*";
-        }else if (action.equals("foundation place")||action.equals("office")){
-            strPattern = "[A-Za-z0-9 \\-]*(in|at)[A-Za-z0-9 \\-]*";
-        }else if (action.equals("foundation place")){
-            strPattern = "[A-Za-z0-9 \\-]*(in|at)[A-Za-z0-9 \\-]*";
+            strPattern = "[A-Za-z0-9 \\-]*(founded).{0,50}";
+        }else if (action.equals("team")){
+            strPattern = ".*(player|present).{0,30}";
+        }else if (action.equals("subordinate")||action.equals("subsidiary")){
+            strPattern = ".*(fate|bought|subsidiary|subsidiaries|Subsidiaries|Subsidiary|Owner|owned|owner).{0,20}";
+        }else if (action.equals("stars")||action.equals("role")||action.equals("generator")){
+            strPattern = ".*";
+        }else if (action.equals("office")){
+            strPattern = ".{0,200}";
         }else {
-            strPattern = "[A-Za-z0-9 \\-]*(in|at)[A-Za-z0-9 \\-]*";
+            strPattern = ".*";
         }
 
         return strPattern;

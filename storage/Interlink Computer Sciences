@@ -1,4 +1,7 @@
 Interlink Computer Sciences
+Founded 1983
+Headquarters Fremont, California
+Products Interlink, TCPaccess
 Interlink Computer Sciences, of Fremont, California, was a developer of hardware and software that allowed IBM mainframe computers running the MVS operating system to be connected to non-IBM networks.
 Interlink was founded in 1983 by Lambert Onuma, Fred Wright, Karl Johnson and Greg Thompson, formerly of Digital Equipment Corporation. The company's first product, called simply Interlink, allowed IBM MVS mainframes to be connected to VAX computers on a DECnet network. Later a VM/DECnet product was developed in cooperation with Dupont to link IBM VM/CMS systems with a DECnet network interconnecting e-mail, file, tape, and storage access, terminal emulation, a program-to-program API, and enabling DECnet to be tunneled over an SNA LU6.2 network.
 In 1990, Interlink acquired a product called ACCES/MVS from Advanced Computer Communications, which implemented a native TCP/IP protocol stack on the MVS and VM operating systems and within CICS regions. First released in 1986, ACCES/MVS had been the first commercial TCP/IP implementation for MVS mainframes. Interlink developed and marketed this product as SNS/TCPaccess. The prefix was later dropped, and TCPaccess became the company's main focus of development by the mid-1990s.
