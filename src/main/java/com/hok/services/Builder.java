@@ -106,7 +106,7 @@ public class Builder {
             if (match_val.equals(correction_map.get(fact))){
                 correct_count++;
             }
-            else System.out.println(fact);  // just added
+            else System.out.println(fact);  // just counting incorrect results
 
         }
         // Only activate when using training data
@@ -185,6 +185,10 @@ public class Builder {
         String subject = token_fact.get("subject");
         String object = token_fact.get("object");
 
+        if (token_fact.get("subject").matches("Nobel .*") || token_fact.get("action").matches("innovation place")){
+            subject = token_fact.get("object");
+            object = token_fact.get("subject");
+        }
         boolean match = false;
 
         String strPattern = stringPattern(action);
@@ -280,8 +284,8 @@ public class Builder {
         String strPattern ="";
         if (action.equals("author")){
             strPattern = ".*(novel by|written by|by author|by the|by|novel|written|book|author|Author).{0,200}";
-        }else if (action.equals("award")){
-            strPattern = ".*(award|awarded|received|awards|Awards).{0,200}";
+        }else if (action.equals("award")||action.equals("honour")){
+            strPattern = ".*(award|awarded|received|awards|Awards|honoured).{0,200}";
         }else if (action.equals("better half")|| action.equals("spouse")){
             strPattern = ".*(married|marry|wife|husband|spouse|spouse\\(s\\)).{0,200}";
         }else if (action.equals("birth place")||action.equals("nascence place")){
@@ -297,8 +301,6 @@ public class Builder {
         }else if (action.equals("stars")||action.equals("role")||action.equals("generator")){
             strPattern = ".*";
         }else if (action.equals("office")){
-            strPattern = ".{0,200}";
-        }else if (action.equals("honour")){
             strPattern = ".{0,200}";
         }else {
             strPattern = ".*";

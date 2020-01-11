@@ -32,9 +32,19 @@ public class Watson {
         String subject = tokens.get("subject");
         String object = tokens.get("object");
         String action = tokens.get("action");
-        File file_subj = new File(storage_dir + subject);
+        File file_subj = null;
 
-        String info = subject_check(subject, file_subj);
+        String info = "";
+
+        if (tokens.get("subject").matches("Nobel .*")|| tokens.get("action").matches("innovation place")){
+            subject = tokens.get("object");
+            file_subj = new File(storage_dir + subject);
+            info = subject_check(subject, file_subj);
+
+        }else {
+            file_subj = new File(storage_dir + subject);
+            info = subject_check(subject, file_subj);
+        }
 
         return info;
     }
@@ -66,7 +76,19 @@ public class Watson {
         String subject = tokens.get("subject")+ " "+ tokens.get("action");
         String object = tokens.get("object");
         String action = tokens.get("action");
-        File file_subj = new File(storage_dir + subject);
+        File file_subj = null;
+
+        if (tokens.get("subject").matches("Nobel .*")|| tokens.get("action").matches("innovation place")){
+            subject = tokens.get("object");
+            file_subj = new File(storage_dir + subject);
+
+        }else {
+            file_subj = new File(storage_dir + subject);
+        }
+
+
+
+
 
         String info = subject_check(subject, file_subj);
 
@@ -76,11 +98,6 @@ public class Watson {
 
 
     public String subject_check(String subject, File file_subj){
-        String action_types[] = new String[]{"Born", "Died","Spouse(s)", "Founded", "Headquarters",
-                "Author", "Owner", "subsidiaries", "Divisions", "Parent", "Awards", };
-
-
-
 
 
 
