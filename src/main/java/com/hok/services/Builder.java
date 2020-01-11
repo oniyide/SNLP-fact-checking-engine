@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
 
 public class Builder {
     // activate if using training data
-    private static final String result_data = "SNLP2019_training_result.ttl";
-    private static final String train_data = "SNLP2019_training.tsv";
+//    private static final String result_data = "SNLP2019_training_result.ttl";
+//    private static final String train_data = "SNLP2019_training.tsv";
 
-//    private static final String result_test_data = "SNLP2019_test_result.ttl";
-//    private static final String test_data = "SNLP2019_test.tsv";
+    private static final String result_test_data = "SNLP2019_test_result.ttl";
+    private static final String test_data = "SNLP2019_test.tsv";
 
     private static final String storage_dir = "storage/";
 
@@ -30,7 +30,7 @@ public class Builder {
 
     public void launch()  {
         new File(storage_dir).mkdirs();
-        File file = new File(train_data);
+        File file = new File(test_data);
         LineIterator lineItr = null;
         try {
             lineItr = FileUtils.lineIterator(file, "UTF-8");
@@ -43,7 +43,7 @@ public class Builder {
 
                         fact_map.put(fact_content.get(0), fact_content.get(1));
                         //  activate for training data only
-                        correction_map.put(fact_content.get(0), fact_content.get(2));
+//                        correction_map.put(fact_content.get(0), fact_content.get(2));
 
                     }
 
@@ -73,9 +73,9 @@ public class Builder {
             for (Map.Entry<String, String> e : res_export.entrySet())
                 data += (p1 + e.getKey() + "> " + p2 + " \"" + e.getValue() + "\"" + p3 + " .\n");
 
-            FileUtils.writeStringToFile(new File(result_data), data, "UTF-8");
+            FileUtils.writeStringToFile(new File(result_test_data), data, "UTF-8");
         } catch (Exception e) {
-            System.out.println("Couldn't Write: " + result_data);
+            System.out.println("Couldn't Write: " + result_test_data);
         }
     }
 
@@ -102,16 +102,17 @@ public class Builder {
             String fact = (String) pair.getKey();
             result_map.put(fact, match_val);
 
-
+            /*
             if (match_val.equals(correction_map.get(fact))){
                 correct_count++;
             }
             else System.out.println(fact);  // just counting incorrect results
+            */
 
         }
         // Only activate when using training data
-        double precision = (double) correct_count/correction_map.size();
-        System.out.println("Value of precision: "+precision);
+//        double precision = (double) correct_count/correction_map.size();
+//        System.out.println("Value of precision: "+precision);
     }
 
     public Map<String, String> tokenSanitizer(String text){
@@ -301,6 +302,8 @@ public class Builder {
         }else if (action.equals("stars")||action.equals("role")||action.equals("generator")){
             strPattern = ".*";
         }else if (action.equals("office")){
+            strPattern = ".{0,200}";
+        }else if (action.equals("squad")){
             strPattern = ".{0,200}";
         }else {
             strPattern = ".*";
