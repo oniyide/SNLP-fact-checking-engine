@@ -31,9 +31,13 @@ With that done, simply go to the EGit repository, bring up the context menu for 
 Executing on IntelliJ
 VCS -> Checkout for Version Control -> Git
 Copy and paste “https://github.com/oniyide/SNLP-fact-checking-engine” in the URL textbox field. Click “clone”
+
 “Would you like to create an IntelliJ IDEA project for the sources you ....” Click Yes.
+
 Select “import project from external model” radio button
+
 Select “Maven”, click next, next, next, Finish
+
 Run the “Main” class in the “com.hok” package
 
 ## Team Members: HOK
