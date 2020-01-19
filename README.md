@@ -51,5 +51,8 @@ Run the “Main” class in the “com.hok” package
 - Apache commons lang3
 
 ## Team Members: HOK
-Oniyide Olugbo Olufemi
+- Oniyide Olugbo Olufemi 
+- Harshith Srinivas 
+- Karun varkey 
+
 
