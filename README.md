@@ -19,15 +19,19 @@ Watson acts as the knowledge source. It checks the storage folder for possibly c
 The Eclipse or Intellij IDE is recommended.
 
 # Executing on Eclipse
-If you don't already have the Git connector for M2Eclipse install it. M2Eclipse will help you along by prompting you on the Import menu.
+File -> Import -> Maven -> Check out Maven Projects from SCM
 
-Select the "Import..." context menu from the Package Explorer view
-Select "Check out Maven projects from SCM" option under the Maven category
-On the window that is presented choose the link "Find more SCM connectors in the m2e Marketplace
-Find connector for Git...install...restart
-Note that in the search box you may have to enter "EGit" instead of "Git" to find the right connector.
+If no Git connector exists, click the “Find more SCM connectors in the m2E Marketplace” link
 
-With that done, simply go to the EGit repository, bring up the context menu for the Working directory and select "Import Maven projects...".
+Search for “m2e-egit”, select the checkbox and click finish, accept license agreement and install. Restart Eclipse
+
+Select “git” in the SCM URL dropdown
+
+Copy and paste “https://github.com/oniyide/SNLP-fact-checking-engine” in the textbox field
+Finish
+
+Run the “Main” class in the “com.hok” package
+
 
 # Executing on IntelliJ
 VCS -> Checkout for Version Control -> Git
