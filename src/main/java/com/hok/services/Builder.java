@@ -26,9 +26,12 @@ public class Builder {
 
     private static final Map<String, String> result_map = new HashMap<>();
     int correct_count = 0;
+    int cc = 0;
+
 
 
     public void launch()  {
+        System.out.println("launch phase");
         new File(storage_dir).mkdirs();
         File file = new File(test_data);
         LineIterator lineItr = null;
@@ -52,7 +55,7 @@ public class Builder {
             generateResult(fact_map);
 
             exportToFile(result_map);
-
+            System.out.println("All facts have been generated in SNLP2019_test_result.ttl");
 
 
         } catch (IOException e) {
@@ -84,7 +87,11 @@ public class Builder {
     public void generateResult(Map<String, String> facts){
 
         Iterator itr = facts.entrySet().iterator();
+
         while (itr.hasNext()) {
+            cc++;
+            if (cc % 250 == 0)
+                System.out.println(cc + " facts processed");
             Map.Entry pair = (Map.Entry)itr.next();
 
             String text = (String)pair.getValue();
