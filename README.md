@@ -1,21 +1,21 @@
 # corpus-driven-fact-checking-engine
 A corpus-driven fact-checking engine, which returns a confidence value between -1 (fact is false) and +1 (fact is true) given a fact from Wikipedia
 
-##Initialization
+## Initialization
 A fact is retrieved from the ttl file. Non alphanumeric characters such as commas, fullstops, dashes are removed from the text. As all facts begin with a supposed subject, they can take two basic forms:
 Subject_Action_Object
 Subject_Object_Action
  
 
 
-##Builder
+## Builder
 The Builder system component sanitizes each fact. It starts with normalizing the text and attaching prepositions that may be part of the subject “and”, “to”, “into” to the subject.
 Uppercase characters beginning words are generally used to denote a subject or object depending on the position in the fact. 
 
-##Watson
+## Watson
 Watson acts as the knowledge source. It checks the storage folder for possibly cached facts. Stored information in the storage are named using the subject token as identifier. 
 
-#Executing Project
+## Executing Project
 The Eclipse or Intellij IDE is recommended.
 Executing on Eclipse
 File -> Import -> Maven -> Check out Maven Projects from SCM
