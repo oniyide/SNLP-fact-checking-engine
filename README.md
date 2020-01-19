@@ -45,6 +45,11 @@ Select “Maven”, click next, next, next, Finish
 
 Run the “Main” class in the “com.hok” package
 
+## Libraries
+- Jsoup Java HTML parser
+- Apache commons IO
+- Apache commons lang3
+
 ## Team Members: HOK
 Oniyide Olugbo Olufemi
 
