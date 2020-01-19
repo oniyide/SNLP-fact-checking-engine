@@ -25,7 +25,6 @@ public class Builder {
     private static final Map<String, String> correction_map = new HashMap<>();
 
     private static final Map<String, String> result_map = new HashMap<>();
-    int correct_count = 0;
     int cc = 0;
 
 
@@ -45,9 +44,6 @@ public class Builder {
                         List<String> fact_content = Arrays.asList(line.split("\t"));
 
                         fact_map.put(fact_content.get(0), fact_content.get(1));
-                        //  activate for training data only
-//                        correction_map.put(fact_content.get(0), fact_content.get(2));
-
                     }
 
                 }
@@ -109,17 +105,8 @@ public class Builder {
             String fact = (String) pair.getKey();
             result_map.put(fact, match_val);
 
-            /*
-            if (match_val.equals(correction_map.get(fact))){
-                correct_count++;
-            }
-            else System.out.println(fact);  // just counting incorrect results
-            */
 
         }
-        // Only activate when using training data
-//        double precision = (double) correct_count/correction_map.size();
-//        System.out.println("Value of precision: "+precision);
     }
 
     public Map<String, String> tokenSanitizer(String text){
@@ -155,7 +142,6 @@ public class Builder {
         text = text.replaceAll("(\\bis\\b)", "");
 
         Pattern act_pattern = Pattern.compile("(\\b([a-z]+\\b) )+");
-//        System.out.println(text);
         Matcher act_matcher = act_pattern.matcher(text);
         if (act_matcher.find()){
             action= act_matcher.group();
@@ -167,18 +153,12 @@ public class Builder {
             text = text.replaceAll("[',.\\-\\&\\:]","");
             text= text.replaceAll("\\([A-Za-z ]*\\)","");
             text = text.replaceAll("\\?","");
-//            text = text.replaceAll("[^\\w\\s]","");
             text = text.replaceAll("\\s+", " ");
             object = StringUtils.trim(text);
         }
 
 
-//        if (c<1500){
-//            System.out.println("subject: "+ subject);
-//            System.out.println("action: "+ action);
-//            System.out.println("object: "+ object +"\n");
-//        }
-//        c++;
+
 
         sanitized_token.put("subject", subject);
         sanitized_token.put("action", action);
@@ -211,7 +191,6 @@ public class Builder {
             search_range = StringUtils.ordinalIndexOf(text, ".", 2);
         }
         if (search_range == -1){
-            System.out.println(subject);
             subtext = text;
         }else {
             subtext = text.substring(0, search_range);
@@ -227,13 +206,9 @@ public class Builder {
         Pattern pattern = Pattern.compile(strPattern + object);
         Matcher matcher = pattern.matcher(subtext);
 
-//        if (subject.contains("John  King Of England"))
-//            System.out.println(subtext);
 
 
         if (matcher.find()){
-//            System.out.print("TRUE \t");
-//            System.out.print(token_fact+"\n");
             match =true;
         }else {
             String[] obj = object.split(" ");
@@ -241,11 +216,8 @@ public class Builder {
             {
                 String new_obj =obj[0]+" "+obj[1];   // Use this format for author its working
                 pattern = Pattern.compile(strPattern + new_obj);
-                //pattern = Pattern.compile("[A-Za-z0-9 \\-]*(novel by|written by|by author|by the|by|novel|written|book)[A-Za-z0-9 \\-]*"+obj[0]+" "+obj[1]);
                 matcher = pattern.matcher(subtext);
                 if (matcher.find()){
-//                    System.out.print("TRUE \t");
-//                    System.out.print(token_fact+"\n");
                     match =true;
                 }
                 else {
@@ -253,23 +225,15 @@ public class Builder {
                     matcher = pattern.matcher(subtext);
 
                     if (matcher.find()){
-//                        System.out.print("TRUE \t");
-//                        System.out.print(token_fact+"\n");
                         match =true;
                     }
                     else {
                         text = Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""); // just added
                         matcher = pattern.matcher(text);
-//                        if (subject.contains("Elie Wiesel"))
-//                            System.out.println("Full text " + text);
                         if (matcher.find()){
-//                            System.out.print("TRUE \t");
-//                            System.out.print(token_fact+"\n");
                             match =true;
                         }
                         else{
-//                            System.out.print("FALSE \t");
-//                            System.out.print(token_fact + "\n");
                             match =false;
                         }
                     }
@@ -278,10 +242,6 @@ public class Builder {
             }
 
         }
-//        if (action.contains("birth place")){
-//            System.out.println(token_fact+ " " +match);
-//        }
-
 
 
         return match;
